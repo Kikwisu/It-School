@@ -1,0 +1,10 @@
+extends layout
+block content
+    include header
+        main
+            div.wrappToCentre
+                div.wrappForquestions
+                    form(method="POST" action="/multy" enctype="multipart/form-data" name="multy" id="multy")
+                        input(type="text" placeholder="Login" name="login")
+                        input(type="file" value="Прикрепить файл" name="file")
+                        input(type="submit" value="Send")

@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= message
+  h2= error.status
+    - var err = "Page not found"
+    -if(error.status === "404")
+        pre= err

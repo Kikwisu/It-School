@@ -1,0 +1,141 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('school:server');
+var http = require('http');
+
+
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '80');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+  * Socket.io and com-port connection
+ */
+
+const io = require('socket.io').listen(server.listen(port));
+
+const SerialPort = require('serialport');
+
+let d = "not our string";
+
+const com_port = new SerialPort('COM3', {
+   baudRate: 9600
+});
+
+com_port.write('main screen turn on', function(err) {
+   if (err) {
+      return console.log('Error on write: ', err.message);
+   }
+   console.log('message written');
+});
+
+let s = "";
+
+com_port.on('readable', function () {
+   s = s + com_port.read().toString();
+   if(s.trim().length !== 3)
+      s = "";
+   else{
+      d = s.trim() + " our string ";
+   }
+   s = "";
+});
+
+function com_port_now() {
+   return d;
+}
+
+io.sockets.on('connection', function (socket) {
+
+   socket.emit('msg', { msg : "\"connection has been started\"" });
+   socket.on('echo', function (data) {
+      let com_data = "255 our string ";
+      data = com_data === data.data;
+      socket.emit('msg', { msg: data });
+   });
+
+
+});
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

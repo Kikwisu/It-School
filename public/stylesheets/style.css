@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #F3F4F6;
+  padding: 0;
+  margin: 0;
+  padding-bottom: 50px;
+}
+
+a {
+  color: #00B7FF;
+}
+
+header{
+  position: fixed;
+  width: 100%;
+  margin: 0;
+  background-color: #2A292B;
+  padding: 30px;
+  font-size: 1.5em;
+  box-shadow: 0 5px 10px 0px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: stretch;
+  z-index: 3;
+
+}
+
+#person{
+  font-size: 0.8em;
+  color: #C5C6CF;
+  padding: 5px;
+  cursor: pointer;
+  width: 70%;
+}
+
+.name{
+  float: left;
+}
+
+#logo{
+  color: #DCDDE2;
+  width: 10%;
+  cursor: pointer;
+}
+
+#enter{
+  color: white;
+  font-size: 0.8em;
+  padding: 5px;
+  cursor: pointer
+}
+
+.wrappToCentre{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sections{
+  margin-top: 30vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  padding: 50px;
+  max-width: 35%;
+}
+
+.section{
+  transition-duration: 0.2s;
+  width: 40%;
+  height: 12.5vh;
+  margin: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  color: #DCDDE2;
+  background-color: #2A292B;
+  padding: 4%;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.5);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.section:hover{
+  width: 42%;
+  height: 14vh;
+  margin: 0;
+}
+
+/* physic */
+
+.content{
+  line-height: 150%;
+}
+
+.wrappForquestions{
+  font-size: 1.3em;
+  margin-top: 15vh;
+  padding: 50px;
+  background-color: white;
+  max-width: 70vw;
+  box-shadow: 0 2px 10px 0px rgba(0,0,0,0.4);
+}
+
+.title{
+  font-weight: 700;
+  padding: 10px;
+  font-size: 1.4em;
+}
+
+input{
+  border: 0;
+  margin: 10px;
+  padding: 10px;
+  outline: 0em;
+}
+
+input[type="text"], input[type="password"]{
+  transition-duration: 0.2s;
+  padding-left: 20px;
+}
+
+input[type="text"]{
+  border-bottom: 1px solid black;
+}
+
+input[type="text"]:focus, input[type="password"]:focus{
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+input[type="submit"], input[type="button"], label{
+  position: relative;
+  z-index: 2;
+  color: white;
+  background-color: #2A292B;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.5);
+}
+
+input[type="file"]{
+  z-index: 1;
+  position: relative;
+  left: -10.5%;
+}
+
+ input[name="login"], input[name="firstName"], input[name="lastName"]{
+   border-bottom: 0;
+ }
+
+textarea{
+  outline: none;
+  resize: none;
+  padding: 20px;
+  color: #55828B;
+  font-size: 1.1em;
+  border: 0;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+}
+
+#enterToAcc{
+  background-color: transparent;
+  font-size: 0.8em;
+  color: rgba(0, 0, 0);
+  margin-left: 20%;
+  box-shadow: 0 0 0 0;
+  //border-bottom: 1px solid black;
+  border-radius: 0px;
+  margin-top: 10px;
+}
+
+li{
+  list-style-type: none;
+}
+
+.buttons{
+  padding: 30px;
+}
+
+

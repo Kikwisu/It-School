@@ -1,0 +1,18 @@
+extends layout
+block content
+    include header
+        main
+            div.wrappToCentre
+                div.wrappForquestions
+                    form(method="POST" action="/users" id="auth")
+                        ul
+                            li
+                                input(type="text" placeholder="Login" name="login")
+                            li
+                                input(type="text" placeholder="Name" name="firstName")
+                            li
+                                input(type="text" placeholder="Surname" name="lastName")
+                            li
+                                input(type="password" placeholder="Password" name="password")
+                            li
+                                input(type="submit" value="Add user" id="enterToAcc")

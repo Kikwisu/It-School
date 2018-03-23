@@ -86,12 +86,26 @@ window.onload = function () {
       let user = document.getElementsByClassName('name')[0].innerHTML;
       let dataObject = { "name" : user };
       $.ajax({
-         url: 'http://localhost:3000/connection',
+         url: 'http://localhost:3000/ping',
          type: 'POST',
          dataType: "json",
          data: dataObject,
          success: function (data) {
-               alert(data);
+               alert(data.result);
+         }
+      });
+   });
+
+   $('#physicCheck').click(function () {
+      let user = document.getElementsByClassName('name')[0].innerHTML;
+      let dataObject = { "name" : user };
+      $.ajax({
+         url: 'http://localhost:3000/physic',
+         type: 'POST',
+         dataType: "json",
+         data: dataObject,
+         success: function (data) {
+            alert(data.result);
          }
       });
    });

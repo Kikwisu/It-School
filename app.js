@@ -11,6 +11,7 @@ const  index = require('./routes/index')
       ,multy = require('./routes/multy')
       ,physic = require('./routes/physic')
       ,net = require('./routes/net')
+      ,stats = require('./routes/stats')
       ,users = require('./routes/users');
 
 
@@ -20,6 +21,15 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
 const app = express();
+
+let allowCrossDomain = function(req, res, next) {
+   res.header('Access-Control-Allow-Origin', "*");
+   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+   res.header('Access-Control-Allow-Headers', 'Content-Type');
+   next();
+};
+
+app.use(allowCrossDomain);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,6 +61,7 @@ app.use('/roboto', roboto);
 app.use('/multy', multy);
 app.use('/physic', physic);
 app.use('/net', net);
+app.use('/stats', stats);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

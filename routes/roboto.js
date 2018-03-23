@@ -11,8 +11,9 @@ router.get('/', function(req, res, next) {
       User.findOne({login: login})
          .then(function(doc){
             name = doc.firstName + " " + doc.lastName;
+            let points = " Ваш результат: " + doc.allBalls + " б";
             enter = "выйти";
-            res.render('roboto', {name: name, enter: enter});
+            res.render('roboto', {name: name, points : points, enter: enter});
          });
    }else{
       res.render('auth', {name: name, enter: enter});

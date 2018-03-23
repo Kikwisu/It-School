@@ -94,6 +94,15 @@ header{
   line-height: 150%;
 }
 
+.member .content{
+  margin-left: 40%;
+}
+
+.member{
+  margin: 30px;
+  padding: 10px;
+}
+
 .wrappForquestions{
   font-size: 1.3em;
   margin-top: 15vh;

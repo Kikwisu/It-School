@@ -27,7 +27,7 @@ var server = http.createServer(app);
   * Socket.io and com-port connection
  */
 
-const io = require('socket.io').listen(server.listen(port));
+/*const io = require('socket.io').listen(server.listen(port));
 
 const SerialPort = require('serialport');
 
@@ -70,7 +70,7 @@ io.sockets.on('connection', function (socket) {
    });
 
 
-});
+});*/
 
 /**
  * Listen on provided port, on all network interfaces.

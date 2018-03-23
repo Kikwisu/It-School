@@ -15,8 +15,9 @@ router.get('/', function(req, res) {
       User.findOne({login: login})
          .then(function(doc){
             name = doc.firstName + " " + doc.lastName;
+            let points = " Ваш результат: " + doc.allBalls + " б";
             enter = "выйти";
-            res.render('net', {name: name, enter: enter});
+            res.render('net', {name: name, points : points, enter: enter});
          });
    }else{
       res.render('auth', {name: name, enter: enter});
@@ -25,6 +26,7 @@ router.get('/', function(req, res) {
 
 router.post('/api', function (req, res) {
    let User = require('./userModel');
+   let msg = 'Вы уже выполнили задание! Ваш результат: ';
 
    let name = req.body.name;
    name = name.substring(0, name.indexOf(" "));
@@ -36,13 +38,18 @@ router.post('/api', function (req, res) {
               , checNet = doc.checNet;
           console.log(doc);
           if(checNet[1] < 2){
+             msg = "Задание выполнено неверно!";
              if(req.body.ping) {
                 netQests[1] = 1;
                 allBalls++;
+                msg = "Задание выполнено верно! Вы получаете 1 балл";
              }
              checNet[1]++;
              Update({ firstName: name }, { allBalls : allBalls, net : netQests, checNet : checNet });
+          }else{
+             msg += netQests[1] + "б.";
           }
+          res.send(msg)
        });
 });
 

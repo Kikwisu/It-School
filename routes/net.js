@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
       User.findOne({login: login})
          .then(function(doc){
             name = doc.firstName + " " + doc.lastName;
-            let points = " Ваш результат: " + doc.allBalls + " б";
+            let points = " Всего баллов: " + doc.allBalls;
             enter = "выйти";
             res.render('net', {name: name, points : points, enter: enter});
          });
@@ -42,6 +42,7 @@ router.post('/api', function (req, res) {
              if(req.body.ping) {
                 netQests[1] = 1;
                 allBalls++;
+                checNet[1]++;
                 msg = "Задание выполнено верно! Вы получаете 1 балл";
              }
              checNet[1]++;
@@ -86,6 +87,7 @@ router.post('/:number', function (req, res) {
                            if(msg === 'Вы успешно выполнили задание'){
                               netQests[0] = 1;
                               allBalls++;
+                              checNet[0]++;
                            }
                            checNet[1]++;
                            Update({login: login}, { allBalls : allBalls, net : netQests, checNet : checNet });
@@ -106,13 +108,14 @@ router.post('/:number', function (req, res) {
                            , allBalls = doc.allBalls
                            , checNet = doc.checNet;
 
-                        if( checNet[2] < 2 ){
+                        if( checNet[2] < 4 ){
                            if( hash === original ){
                               netQests[2] = 1;
                               allBalls++;
                               msg = 'Вы успешно выполнили задание';
+                              checNet[2]++;
                            }
-                           checNet[1]++;
+                           checNet[2]++;
                            Update({login: login}, { allBalls : allBalls, net : netQests, checNet : checNet });
                         }
                         else
@@ -132,17 +135,18 @@ router.post('/:number', function (req, res) {
                            , allBalls = doc.allBalls
                            , checNet = doc.checNet;
 
-                        if( checNet[2] < 2 ){
+                        if( checNet[3] < 2 ){
                            if( hash === check ){
-                              netQests[2] = 1;
+                              netQests[3] = 1;
                               allBalls++;
                               msg = 'Вы успешно выполнили задание';
+                              checNet[3]++;
                            }
-                           checNet[1]++;
+                           checNet[3]++;
                            Update({login: login}, { allBalls : allBalls, net : netQests, checNet : checNet });
                         }
                         else
-                           msg = 'Ваш результат за это задание: ' + netQests[2];
+                           msg = 'Ваш результат за это задание: ' + netQests[3];
                         return res.send(msg);
                      });
                });

@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
       User.findOne({login: login})
          .then(function(doc){
             name = doc.firstName + " " + doc.lastName;
-            let points = " Ваш результат: " + doc.allBalls + " б";
+            let points = " Всего баллов: " + doc.allBalls;
             enter = "выйти";
             res.render('multy', {name: name,  points : points, enter: enter});
          });

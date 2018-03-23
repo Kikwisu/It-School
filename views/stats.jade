@@ -1,0 +1,12 @@
+extends layout
+block content
+    include header
+        main
+            div.wrappToCentre
+                div.wrappForquestions
+                    -var i = 0
+                    -each user in users
+                        -i++
+                        div.member
+                            div.title= i +". " + user.firstName + ' ' + user.lastName
+                            div.content result:  #{user.allBalls}

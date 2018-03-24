@@ -10,7 +10,7 @@ const MongoStore = require('connect-mongo')(session);
 
 mongoose.connect("mongodb://localhost:27017/usersDBSchool");
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
    let name = "Войдите в аккаунт!";
    let enter = "войти";
    if(req.session.user){
@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
    }
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
    if( req.body.exit ){
       delete req.session.user;
       return res.send("Вы вышли из своего аккаунта!");
@@ -86,6 +86,7 @@ router.post('/', function(req, res, next) {
                 checNet: [ 0, 0, 0, 0 ],
                 physic: [ 0, 0, 0 ],
                 checPhysic: [ 0, 0, 0 ],
+                multy: [ 0, 0, 0 ],
                 roboto: [ 0, 0, 0 ],
                 checRoboto: [ 0, 0, 0 ]
              });

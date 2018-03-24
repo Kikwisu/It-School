@@ -42,7 +42,63 @@ window.onload = () => {
     *    Submitting of all forms
     **/
 
-   $( `form` ).submit( function ( e ) {
+   $('#auth').submit(function ( e ) {
+      e.preventDefault();
+
+      if ($( this ).data( 'formstatus' ) !== ' submitting ' ){
+
+         /**
+          *    Forms`s metods
+          **/
+
+         let form = $( this ),
+            formUrl = form.attr( 'action' ),
+            formMethod = form.attr( 'method' );
+
+         let formData2 = form.serialize();
+
+            $.ajax({
+
+               url : formUrl,
+               type : formMethod,
+               data : formData2,
+               success : formSuccessAuth
+
+            });
+      }
+
+      return false;
+   });
+
+   $('.sendFile').submit(function ( e ) {
+      e.preventDefault();
+
+      if ($( this ).data( 'formstatus' ) !== ' submitting ' ){
+
+         /**
+          *    Forms`s metods
+          **/
+
+         let form = $( this ),
+            formUrl = form.attr( 'action' ),
+            formMethod = form.attr( 'method' );
+
+         let formData2 = form.serialize();
+
+         $.ajax({
+
+            url : formUrl,
+            type : formMethod,
+            data : formData2,
+            success : formSuccessAuth
+
+         });
+      }
+
+      return false;
+   });
+
+   $( `.sendFile` ).submit( function ( e ) {
 
       e.preventDefault();
 
@@ -57,24 +113,6 @@ window.onload = () => {
             formMethod = form.attr( 'method' );
 
          let formData = new FormData( document.getElementById ( e.target.id ) );
-         let formData2 = form.serialize();
-
-         /**
-          *   Choose the required method
-          **/
-
-         if ( e.target.id === "auth" ) {
-
-            $.ajax({
-
-               url : formUrl,
-               type : formMethod,
-               data : formData2,
-               success : formSuccessAuth
-
-            });
-
-         } else {
 
             $.ajax({
 
@@ -87,23 +125,39 @@ window.onload = () => {
 
             });
 
-         }
-
       }
 
       return false;
 
    });
 
+   $('.sendMulty').submit(function (e) {
+      e.preventDefault();
+
+      if ($( this ).data( 'formstatus' ) !== ' submitting ' ){
+
+         let form = $( this ),
+            formUrl = form.attr( 'action' ),
+            formMethod = form.attr( 'method' );
+
+         let formData2 = form.serialize();
+         let user = document.getElementsByClassName( 'name' )[0].innerHTML;
+         console.log(formData2 + "&name=" + user);
+
+         $.ajax({
+
+            url : formUrl,
+            type : formMethod,
+            data : formData2 + "&name=" + user,
+            success : formSuccessAuth
+
+         });
+      }
+
+      return false;
+   });
+
    function formSuccessAuth( data ) {
-
-       let form = document.getElementById( 'auth' );
-
-       for ( let i = 0 ; i < form.elements.length - 1 ; i++ ) {
-
-          form.elements[i].value = "";
-
-       }
 
        if ( data === "Вы успешно вошли в свой аккаунт" )
           location.href = "/";
@@ -131,7 +185,7 @@ window.onload = () => {
          type : 'POST',
          dataType : "json",
          data : dataObject,
-         success : data => {
+         success : ( data ) => {
 
                alert(data.result);
 
@@ -156,7 +210,27 @@ window.onload = () => {
          }
 
       });
-
    });
+
+   $('.robotoCheck').click(function (e) {
+      let id = e.target.id;
+      let user = document.getElementsByClassName( 'name' )[0].innerHTML;
+      let dataObject = { "name" : user };
+
+      $.ajax({
+
+         url : 'http://localhost:3000/roboto/' + id,
+         type : 'POST',
+         dataType : "json",
+         data : dataObject,
+         success : data => {
+            alert( data.result );
+         }
+
+      });
+
+   })
+
+
 
 };

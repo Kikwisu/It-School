@@ -4,7 +4,36 @@ block content
         main
             div.wrappToCentre
                 div.wrappForquestions
-                    form(method="POST" action="/multy" enctype="multipart/form-data" name="multy" id="multy")
-                        input(type="text" placeholder="Login" name="login")
-                        input(type="file" value="Прикрепить файл" name="file")
-                        input(type="submit" value="Send")
+                    div.question
+                        div.title
+                            | Задание 1
+                        div.content
+                            | Введите получившийся ответ в поле
+                            br
+                            | Для проверки выполнения нажмите кнопку «Проверить задание 1» и ждите ответа тестирующей системы.
+                        form(method="POST" action="http://localhost:3000/multy/0" enctype="multipart/form-data" name="quest3" id="quest1" class='sendMulty')
+                            div.buttons
+                                input(type="text" placeholder="Ответ:" name="answ")
+                                input(type="submit" value="Проверить задание 1")
+                    div.question
+                        div.title
+                            | Задание 2
+                        div.content
+                            | Введите получившийся ответ в поле
+                            br
+                            | Для проверки выполнения нажмите кнопку «Проверить задание 2» и ждите ответа тестирующей системы.
+                        form(method="POST" action="http://localhost:3000/multy/1" enctype="multipart/form-data" name="quest3" id="question2" class='sendMulty')
+                            div.buttons
+                                input(type="text" placeholder="Ответ:" name="answ")
+                                input(type="submit" value="Проверить задание 2" class="multyCheck")
+                    div.question
+                        div.title
+                            | Задание 3
+                        div.content
+                            | Введите получившийся ответ в поле
+                            br
+                            | Для проверки выполнения нажмите кнопку «Проверить задание 3» и ждите ответа тестирующей системы.
+                        form(method="POST" action="http://localhost:3000/multy/2" enctype="multipart/form-data" name="quest3" id="quest3" class='sendMulty')
+                            div.buttons
+                                input(type="text" placeholder="Ответ:" name="answ")
+                                input(type="submit" value="Проверить задание 3" class="multyCheck")

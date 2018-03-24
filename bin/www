@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('school:server');
-var http = require('http');
+const app = require('../app');
+const debug = require('debug')('school:server');
+const http = require('http');
 
 
 
@@ -14,63 +14,14 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '80');
+let port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
-
-/**
-  * Socket.io and com-port connection
- */
-
-/*const io = require('socket.io').listen(server.listen(port));
-
-const SerialPort = require('serialport');
-
-let d = "not our string";
-
-const com_port = new SerialPort('COM3', {
-   baudRate: 9600
-});
-
-com_port.write('main screen turn on', function(err) {
-   if (err) {
-      return console.log('Error on write: ', err.message);
-   }
-   console.log('message written');
-});
-
-let s = "";
-
-com_port.on('readable', function () {
-   s = s + com_port.read().toString();
-   if(s.trim().length !== 3)
-      s = "";
-   else{
-      d = s.trim() + " our string ";
-   }
-   s = "";
-});
-
-function com_port_now() {
-   return d;
-}
-
-io.sockets.on('connection', function (socket) {
-
-   socket.emit('msg', { msg : "\"connection has been started\"" });
-   socket.on('echo', function (data) {
-      let com_data = "255 our string ";
-      data = com_data === data.data;
-      socket.emit('msg', { msg: data });
-   });
-
-
-});*/
+let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -85,7 +36,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  let port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -109,7 +60,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
+  let bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -133,8 +84,8 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
+  let addr = server.address();
+  let bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);

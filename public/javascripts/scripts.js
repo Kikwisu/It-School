@@ -70,34 +70,6 @@ window.onload = () => {
       return false;
    });
 
-   $('.sendFile').submit(function ( e ) {
-      e.preventDefault();
-
-      if ($( this ).data( 'formstatus' ) !== ' submitting ' ){
-
-         /**
-          *    Forms`s metods
-          **/
-
-         let form = $( this ),
-            formUrl = form.attr( 'action' ),
-            formMethod = form.attr( 'method' );
-
-         let formData2 = form.serialize();
-
-         $.ajax({
-
-            url : formUrl,
-            type : formMethod,
-            data : formData2,
-            success : formSuccessAuth
-
-         });
-      }
-
-      return false;
-   });
-
    $( `.sendFile` ).submit( function ( e ) {
 
       e.preventDefault();
